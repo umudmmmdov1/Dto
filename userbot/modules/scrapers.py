@@ -8,7 +8,7 @@ import time
 import math
 import asyncio
 import shutil
-import emoji
+import telethon
 from datetime import datetime
 from bs4 import BeautifulSoup
 import re, requests
