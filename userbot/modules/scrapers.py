@@ -538,45 +538,36 @@ EMOJI_PATTERN = re.compile(
 def deEmojify(inputString: str) -> str:
     return re.sub(EMOJI_PATTERN, "", inputString)
 
-@register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
-async def translateme(trans):
-    if trans.fwd_from:
+@register(outgoing=True, pattern=r"^\.trt(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
         return
+    if "trim" in event.raw_text:
 
-    if trans.is_reply and not trans.pattern_match.group(1):
-        message = await trans.get_reply_message()
-        message = str(message.message)
+        return
+    input_str = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        text = previous_message.message
+        lan = input_str or "az"
+    elif "-" in input_str:
+        lan, text = input_str.split("-")
     else:
-        message = str(trans.pattern_match.group(1))
-
-    if not message:
-        return await trans.edit(
-            "`Mənə mesaj ver 🥺`")
-
-    await trans.edit("**Tərcümə olunur ⌛**")
+        await event.edit("**Mənə mesaj ver 🥺**")
+        return
+    text = emoji.demojize(text.strip())
+    lan = lan.strip()
     translator = Translator()
     try:
-        reply_text = translator.translate(deEmojify(message),
-                                          lang_tgt=TRT_LANG)
-    except ValueError:
-        return await trans.edit(
-            "**Xətalı dil seçdiniz ❌**`.lang tts/trt <dil kodu>`**.**"
+        translated = translator.translate(text, dest=lan)
+        after_tr_text = translated.text
+        output_str = """⚫ Bu dildən:`{}`\n⚪ Bu dilə
+\n:{}""".format(
+            translated.src, after_tr_text
         )
-
-    try:
-        source_lan = translator.detect(deEmojify(message))[1].title()
-    except:
-        source_lan = "Goole bu mesajı tərcümə edə bilmədi ❌"
-
-    reply_text = f"⚫ Bu dildən: **{source_lan}**\n⚪ Bu dilə: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text}"
-
-    await trans.edit(reply_text)
-    
-    if BOTLOG:
-        await trans.client.send_message(
-            BOTLOG_CHATID,
-            f"`{message} sözü {reply_text} ' tərcümə olundu ✅`")
-
+        await event.edit(output_str)
+    except Exception as exc:
+        await event.edit(str(exc))
 
     
 @register(pattern=".lang (trt|tts) (.*)", outgoing=True)
