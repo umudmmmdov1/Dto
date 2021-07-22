@@ -38,7 +38,7 @@ qrcode
 requests>=2.18.4
 git+https://github.com/bisoncorps/search-engine-parser
 speedtest-cli>=2.0.2
-sqlalchemy>=1.2
+sqlalchemy>=1.4.22
 spotdl
 selenium>=3.141.0
 telethon>=1.23.0
