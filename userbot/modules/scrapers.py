@@ -8,7 +8,6 @@ import time
 import math
 import asyncio
 import shutil
-import telethon
 from datetime import datetime
 from bs4 import BeautifulSoup
 import re, requests
@@ -548,18 +547,18 @@ async def translateme(trans):
     elif textx:
         message = textx.text
     else:
-        await trans.edit("`Tərcümə eləməyim üçün mənə mətin ver 🥰`")
+        await trans.edit("`Tərcümə eləməyim üçün mənə mesaj vaf!`")
         return
 
     try:
         reply_text = translator.translate(deEmojify(message), dest=TRT_LANG)
     except ValueError:
-        await trans.edit("bilinməyən dil kodu.")
+        await trans.edit("Bilinməyən dil kodu.")
         return
 
     source_lan = LANGUAGES[f'{reply_text.src.lower()}']
     transl_lan = LANGUAGES[f'{reply_text.dest.lower()}']
-    reply_text = f"⚫ Bu dildən:**{source_lan.title()}**\n⚪ Bu dilə:**{transl_lan.title()}:**\n\n{reply_text.text}"
+    reply_text = f"Bu dildən:**{source_lan.title()}**\nBu dilə:**{transl_lan.title()}**\n\n{reply_text.text}"
 
     await trans.edit(reply_text)
     if BOTLOG:
@@ -568,6 +567,7 @@ async def translateme(trans):
             f"{source_lan.title()} sözü {transl_lan.title()} tərcümə olundu.",
         )
 
+    
 @register(pattern=".lang (trt|tts) (.*)", outgoing=True)
 async def lang(value):
     """ .lang  """
@@ -601,7 +601,6 @@ async def lang(value):
         await value.client.send_message(
             BOTLOG_CHATID,
             f"`{scraper} modulu üçün həmişəki dil {LANG.title()} dilinə dəyişildi.`")
-
 
 @register(outgoing=True, pattern=r"^.spack (.*)")
 async def search_pack(event):
