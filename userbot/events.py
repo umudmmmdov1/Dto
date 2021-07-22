@@ -1,7 +1,5 @@
 # U S Σ R Δ T O R / Ümüd
 
-""" Xeta """
-
 import sys
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
@@ -15,7 +13,6 @@ from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
 
 
 def register(**args):
-    """  """
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
     groups_only = args.get('groups_only', False)
@@ -57,7 +54,7 @@ def register(**args):
                 return
              
             if groups_only and not check.is_group:
-                await check.respond("`Bunun bir qrup olduğuna inanmıram.`")
+                await check.respond("`Bunun bir qrup olduğunu düşünmürəm.`")
                 return
 
             try:
@@ -71,37 +68,31 @@ def register(**args):
             except BaseException:
                 if not disable_errors:
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-                    eventtext = str(check.text)
-                    text = "**✥ U S Σ R Δ T O R ERROR ✥**\n"
-                    if len(eventtext)<3:
-                        text += f"\n**🗒️ Buna görə:** {eventtext}\n"
-                    link = "[U S Σ R Δ T O R](https://t.me/UseratorSUP)"
-                    text += "\n🔰 İstəsəniz, bunu yönlədirə bilərsiniz."
-                    text += f"sadəcə bu mesajı\n{link} bura göndərin.\n"
-                    text += "Xəta və Tarix xaricində heç birşey qeyd edilmir\n"
 
-                    ftext = "========== XEBERDARLIQ =========="
-                    ftext += "\nBu fayl sadece burada yüklenib,"
-                    ftext += "\nsadece xeta ve tarix yerini qeyd etdik,"
-                    ftext += "\ngizliliyinize hörmet edirik,"
-                    ftext += "\nburada her hansı bir gizli melumat ola bilmez."
-                    ftext += "\nbu xeta şikayeti olmaya biler, kimse melumatlarinizi ogurlaya bilmez.\n"
-                    ftext += "================================\n\n"
-                    ftext += "--------USERBOT XETA GUNLUYU--------\n"
+                    dtotext = str(check.text)
+                    text = "**✥ U S Σ R Δ T O R ERROR ✥**\n\n"
+                    link = "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
+                    if len(dtotext)<10:
+                        text += f"⌨️ Əmr: {dtotext}\n\n"
+                    text += "Xəta baş verdi 🤷🏻‍♂️"
+                    text += f"Bu loqu {link} göndərin."
+                    text += "Xətanın nə oluğunu öyrənin\n"
+                    
+                    ftext = "--------U S Σ R Δ T O R ERROR--------\n"
                     ftext += "\nTarix: " + date
-                    ftext += "\nQrup ID: " + str(check.chat_id)
-                    ftext += "\nGönderen istifadeçinin ID: " + str(check.sender_id)
-                    ftext += "\n\nHadise:\n"
+                    ftext += "\nQrup IDsi: " + str(check.chat_id)
+                    ftext += "\nGöndərən istifadəçinin IDsi: " + str(check.sender_id)
+                    ftext += "\n\nXətanın səbəbi:\n"
                     ftext += str(check.text)
-                    ftext += "\n\nGeri izleme melumatı:\n"
+                    ftext += "\n\nGeri izləmə məlumatı:\n"
                     ftext += str(format_exc())
-                    ftext += "\n\nXeta metini:\n"
+                    ftext += "\n\nXəta mətni:\n"
                     ftext += str(sys.exc_info()[1])
-                    ftext += "\n\n--------USERBOT XETA GUNLUYU BİTİS--------"
+                    ftext += "\n\n--------U S Σ R Δ T O R--------"
 
-                    command = "git log --pretty=format:\"%an: %s\" -3"
+                    command = "git log --pretty=format:\"%an: %s\" -0"
 
-                    ftext += "\n\n\nSon 3 commit:\n"
+                    ftext += "ㅤ"
 
                     process = await asyncsubshell(command,
                                                   stdout=asyncsub.PIPE,
@@ -117,8 +108,8 @@ def register(**args):
                     file.close()
 
                     if LOGSPAMMER:
-                        await check.client.respond("`Təəsüf, UserBot'um çökdü.\
-                        \nXəta günlükləri U S Σ R Δ T O R günlük qrupunda saxlanılır.`")
+                        await check.client.respond("`Bağışlayın, UserBot'um çökdü.\
+                        \nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`")
 
                     await check.client.send_file(send_to,
                                                  "error.log",
