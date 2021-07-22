@@ -539,33 +539,43 @@ def deEmojify(inputString: str) -> str:
 
 @register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
 async def translateme(trans):
-    translator = Translator()
-    textx = await trans.get_reply_message()
-    message = trans.pattern_match.group(1)
-    if message:
-        pass
-    elif textx:
-        message = textx.text
-    else:
-        await trans.edit("`Tərcümə eləməyim üçün mənə mesaj vaf!`")
+    if trans.fwd_from:
         return
+
+    if trans.is_reply and not trans.pattern_match.group(1):
+        message = await trans.get_reply_message()
+        message = str(message.message)
+    else:
+        message = str(trans.pattern_match.group(1))
+
+    if not message:
+        return await trans.edit(
+            "`Mənə mesaj ver 🥺`")
+
+    await trans.edit("**Tərcümə olunur ⌛**")
+    translator = Translator()
+    try:
+        reply_text = translator.translate(deEmojify(message),
+                                          lang_tgt=TRT_LANG)
+    except ValueError:
+        return await trans.edit(
+            "**Xətalı dil seçdiniz ❌**`.lang tts/trt <dil kodu>`**.**"
+        )
 
     try:
-        reply_text = translator.translate(deEmojify(message), dest=TRT_LANG)
-    except ValueError:
-        await trans.edit("Bilinməyən dil kodu.")
-        return
+        source_lan = translator.detect(deEmojify(message))[1].title()
+    except:
+        source_lan = "Goole bu mesajı tərcümə edə bilmədi ❌"
 
-    source_lan = LANGUAGES[f'{reply_text.src.lower()}']
-    transl_lan = LANGUAGES[f'{reply_text.dest.lower()}']
-    reply_text = f"Bu dildən:**{source_lan.title()}**\nBu dilə:**{transl_lan.title()}**\n\n{reply_text.text}"
+    reply_text = f"⚫ Bu dildən: **{source_lan}**\n⚪ Bu dilə: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text}"
 
     await trans.edit(reply_text)
+    
     if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
-            f"{source_lan.title()} sözü {transl_lan.title()} tərcümə olundu.",
-        )
+            f"`{message} sözü {reply_text} ' tərcümə olundu ✅`")
+
 
     
 @register(pattern=".lang (trt|tts) (.*)", outgoing=True)
