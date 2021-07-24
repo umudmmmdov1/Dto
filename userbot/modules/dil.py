@@ -20,7 +20,7 @@ async def dil(event):
     global LANGUAGE_JSON
 
     komut = event.pattern_match.group(1)
-    if search(r"y[uü]kle|install", komut):
+    if search(r"y[uü]kl[eə]|install", komut):
         await event.edit(LANG['DİL1'])
         if event.is_reply:
             reply = await event.get_reply_message()
@@ -45,7 +45,7 @@ async def dil(event):
             await event.edit(f"✅ `{dosya['LANGUAGE']}` `dili uğurla yükləndi!`\n\n**İstəklərin keçərli olması üçün botu yenidən başladın!**")
         else:
             await event.edit("**Xaiş bir dil faylına cavab olaraq yazın!**")
-    elif search(r"melumat|info", komut):
+    elif search(r"m[eə]lumat|info", komut):
         await event.edit("`Dil faylı məlumatları gətirilir... Xaiş gözləyin.`")
         if event.is_reply:
             reply = await event.get_reply_message()
@@ -80,7 +80,7 @@ async def dil(event):
 CmdHelp('dil').add_command(
     'dil', None, 'Yüklədiyiniz dil haqqında məlumat verər.'
 ).add_command(
-    'dil melumat', None, 'Cavab verdiyiniz dil faylı haqqında məlumat verər.'
+    'dil məlumat', None, 'Cavab verdiyiniz dil faylı haqqında məlumat verər.'
 ).add_command(
-    'dil yükle', None, 'Cavab verdiyiniz dil faylını yükləyər.'
+    'dil yüklə', None, 'Cavab verdiyiniz dil faylını yükləyər.'
 ).add()
