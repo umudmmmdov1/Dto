@@ -38,6 +38,10 @@
             "NEED_MODULE": "`Modullar aşağıdadır 👇🏻 \nİstifadəsi: .dto <modul adı>`"
         },
 
+        "__event": {
+            "event1": "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
+        },
+
         "__helpme": {
             "NO_BOT": "`Bot işləmir! Zəhmət olmasa Bot Tokeni və İstifadəçi adını düzgün yazın. Modul dayandırıldı.`"
         },
