@@ -74,7 +74,7 @@ def register(**args):
                     link = "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
                     if len(dtotext)<10:
                         text += f"⌨️ Əmr: {dtotext}\n\n"
-                    text += "Xəta baş verdi 🤷🏻‍♂️"
+                    text += "Xəta baş verdi 🤷🏻‍♂️\n"
                     text += f"Bu loqu {link} göndərin."
                     text += "Xətanın nə oluğunu öyrənin\n"
                     
