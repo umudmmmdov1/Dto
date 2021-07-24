@@ -8,13 +8,20 @@ from json import loads, JSONDecodeError
 from userbot.language import LANGUAGE_JSON
 from os import remove
 
+# ██████ LANGUAGE CONSTANTS ██████ #
+
+from userbot.language import get_value
+LANG = get_value("dil")
+
+# ████████████████████████████████ #
+
 @register(outgoing=True, pattern="^.dil ?(.*)")
 async def dil(event):
     global LANGUAGE_JSON
 
     komut = event.pattern_match.group(1)
     if search(r"y[uü]kle|install", komut):
-        await event.edit("`Dil faylı yüklənir... Xahiş gözləyin.`")
+        await event.edit(LANG['DİL1'])
         if event.is_reply:
             reply = await event.get_reply_message()
             dosya = await reply.download_media()
