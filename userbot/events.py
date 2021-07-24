@@ -75,14 +75,14 @@ def register(**args):
                     if len(dtotext)<10:
                         text += f"⌨️ Əmr: {dtotext}\n\n"
                     text += "Xəta baş verdi 🤷🏻‍♂️\n"
-                    text += f"Bu loqu {link} göndərin."
+                    text += f"Bu log'u {link} göndərin."
                     text += "Xətanın nə oluğunu öyrənin\n"
                     
                     ftext = "--------U S Σ R Δ T O R ERROR--------\n"
                     ftext += "\nTarix: " + date
-                    ftext += "\nQrup IDsi: " + str(check.chat_id)
-                    ftext += "\nGöndərən istifadəçinin IDsi: " + str(check.sender_id)
-                    ftext += "\n\nXətanın səbəbi:\n"
+                    ftext += "\nQrup ID: " + str(check.chat_id)
+                    ftext += "\nGöndərən istifadəçinin ID: " + str(check.sender_id)
+                    ftext += "\n\nXəta səbəbi:\n"
                     ftext += str(check.text)
                     ftext += "\n\nGeri izləmə məlumatı:\n"
                     ftext += str(format_exc())
@@ -103,7 +103,7 @@ def register(**args):
 
                     ftext += result
 
-                    file = open("error.log", "w+")
+                    file = open("ΣRROR.log", "w+")
                     file.write(ftext)
                     file.close()
 
@@ -112,7 +112,7 @@ def register(**args):
                         \nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`")
 
                     await check.client.send_file(send_to,
-                                                 "error.log",
+                                                 "ΣRROR.log",
                                                  caption=text)
                     remove("error.log")
             else:
