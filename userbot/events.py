@@ -11,13 +11,6 @@ from telethon import events
 
 from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
 
-# ██████ LANGUAGE CONSTANTS ██████ #
-
-from userbot.language import get_value
-LANG = get_value("event")
-
-# ████████████████████████████████ #
-
 
 def register(**args):
     pattern = args.get('pattern', None)
@@ -77,15 +70,15 @@ def register(**args):
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
                     dtotext = str(check.text)
-                    text = "**✥ U S Σ R Δ T O R ERROR ✥**\n\n"
-                    link = (LANG["event1"])
+                    text = "**✥ U S Σ R Δ T O R ΣRROR ✥**\n\n"
+                    link = "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
                     if len(dtotext)<10:
                         text += f"⌨️ Əmr: {dtotext}\n\n"
                     text += "Xəta baş verdi 🤷🏻‍♂️\n"
-                    text += f"Bu log'u {link} göndərin."
-                    text += "Xətanın nə oluğunu öyrənin\n"
+                    text += f"ℹ️ Bu log'u {link} göndərin.\n"
+                    text += "Xətanın nə oluğunu öyrənin ✅"
                     
-                    ftext = "--------U S Σ R Δ T O R ERROR--------\n"
+                    ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
                     ftext += "\nTarix: " + date
                     ftext += "\nQrup ID: " + str(check.chat_id)
                     ftext += "\nGöndərən istifadəçinin ID: " + str(check.sender_id)
@@ -95,7 +88,7 @@ def register(**args):
                     ftext += str(format_exc())
                     ftext += "\n\nXəta mətni:\n"
                     ftext += str(sys.exc_info()[1])
-                    ftext += "\n\n--------U S Σ R Δ T O R--------"
+                    ftext += "\n\n--------U S Σ R Δ T O R ΣRROR--------"
 
                     command = "git log --pretty=format:\"%an: %s\" -0"
 
