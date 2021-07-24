@@ -8,6 +8,7 @@ import time
 import math
 import asyncio
 import shutil
+import emoji
 from datetime import datetime
 from bs4 import BeautifulSoup
 import re, requests
@@ -30,7 +31,8 @@ from requests import get
 from search_engine_parser import GoogleSearch
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from google_trans_new import LANGUAGES, google_translator
+from google_trans_new import google_translator
+from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from emoji import get_emoji_regexp
@@ -536,46 +538,36 @@ EMOJI_PATTERN = re.compile(
 def deEmojify(inputString: str) -> str:
     return re.sub(EMOJI_PATTERN, "", inputString)
 
-@register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
-async def translateme(trans):
-    """ .trt  """
-    if trans.fwd_from:
+@register(outgoing=True, pattern=r"^\.trt(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
         return
+    if "trim" in event.raw_text:
 
-    if trans.is_reply and not trans.pattern_match.group(1):
-        message = await trans.get_reply_message()
-        message = str(message.message)
+        return
+    input_str = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        text = previous_message.message
+        lan = input_str or "az"
+    elif "-" in input_str:
+        lan, text = input_str.split("-")
     else:
-        message = str(trans.pattern_match.group(1))
-
-    if not message:
-        return await trans.edit(
-            "`Mənə mesaj ver!`")
-
-    await trans.edit("**Tərcümə edilir.**")
-    translator = google_translator()
+        await event.edit("**Mənə mesaj ver 🥺**")
+        return
+    text = emoji.demojize(text.strip())
+    lan = lan.strip()
+    translator = Translator()
     try:
-        reply_text = translator.translate(deEmojify(message),
-                                          lang_tgt=TRT_LANG)
-    except ValueError:
-        return await trans.edit(
-            "**Xətalı dil kodu, düzgün dil kodu seçin **`.lang tts/trt <dil kodu>`**.**"
+        translated = translator.translate(text, dest=lan)
+        after_tr_text = translated.text
+        output_str = """⚫ Bu dildən:`{}`\n⚪ Bu dilə
+\n:{}""".format(
+            translated.src, after_tr_text
         )
-
-    try:
-        source_lan = translator.detect(deEmojify(message))[1].title()
-    except:
-        source_lan = "(Google bu mesajı çeviremedi)"
-
-    reply_text = f"Bu dildən: **{source_lan}**\nBu dilə: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text}"
-
-    await trans.edit(reply_text)
-    
-    if BOTLOG:
-        await trans.client.send_message(
-            BOTLOG_CHATID,
-            f"`{message} sözü {reply_text} bu sözə tərcümə olundu.`")
-
+        await event.edit(output_str)
+    except Exception as exc:
+        await event.edit(str(exc))
 
     
 @register(pattern=".lang (trt|tts) (.*)", outgoing=True)
