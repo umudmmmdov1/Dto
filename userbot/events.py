@@ -11,6 +11,13 @@ from telethon import events
 
 from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
 
+# ██████ LANGUAGE CONSTANTS ██████ #
+
+from userbot.language import get_value
+LANG = get_value("event")
+
+# ████████████████████████████████ #
+
 
 def register(**args):
     pattern = args.get('pattern', None)
@@ -71,7 +78,7 @@ def register(**args):
 
                     dtotext = str(check.text)
                     text = "**✥ U S Σ R Δ T O R ERROR ✥**\n\n"
-                    link = "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
+                    link = (LANG["event1"])
                     if len(dtotext)<10:
                         text += f"⌨️ Əmr: {dtotext}\n\n"
                     text += "Xəta baş verdi 🤷🏻‍♂️\n"
