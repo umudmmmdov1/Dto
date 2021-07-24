@@ -419,7 +419,7 @@ async def search_pack(event):
         if pack.button:
             packtitle = (pack.find("div", "sticker-pack__title")).get_text()
             packlink = (pack.a).get("href")
-            reply += f" ➤ [{packtitle}]({packlink})\n\n"
+            netice += f" ➤ [{packtitle}]({packlink})\n\n"
     await event.edit(netice)
 
 
