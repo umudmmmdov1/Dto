@@ -90,9 +90,9 @@ def register(**args):
                     ftext += str(sys.exc_info()[1])
                     ftext += "\n\n--------U S Σ R Δ T O R--------"
 
-                    command = "git log --pretty=format:\"%an: %s\" -5"
+                    command = "git log --pretty=format:\"%an: %s\" -0"
 
-                    ftext += "\n\n\nSon 5 yenilənmə:\n"
+                    ftext += "ㅤ"
 
                     process = await asyncsubshell(command,
                                                   stdout=asyncsub.PIPE,
@@ -111,9 +111,9 @@ def register(**args):
                         await check.client.respond("`Bağışlayın, UserBot'um çökdü.\
                         \nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`")
 
-                    await bot.send_file(send_to,
-                                        "error.log",
-                                        caption=text)
+                    await check.client.send_file(send_to,
+                                                 "error.log",
+                                                 caption=text)
                     remove("error.log")
             else:
                 pass
