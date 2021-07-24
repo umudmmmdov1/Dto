@@ -405,7 +405,7 @@ async def rastick(event):
 
 CmdHelp('stickers').add_command(
     'fırlat', None, (LANG['STIK1'])
-)add_command(
+).add_command(
     'sinfo', None, 'Stiker haqqında məlumat verər.'
 ).add_command(
     'spng', None, 'Stikeri png kimi göndərər.'
