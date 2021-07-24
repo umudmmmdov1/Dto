@@ -2,10 +2,11 @@
 
 """ Stickers """
 import asyncio, time, random
-import io, os, re
+import io, os, re, requests
 import math
 import urllib.request
 from os import remove
+from bs4 import BeautifulSoup
 from asyncio import sleep
 from datetime import datetime
 from io import BytesIO
@@ -402,6 +403,25 @@ async def rastick(event):
     await sleep(2)
     await event.delete()
 
+@register(outgoing=True, pattern=r"^.spack (.*)")
+async def search_pack(event):
+    query = event.pattern_match.group(1)
+    if not query:
+        return await event.edit("`Axtardığınız paketin adını daxil edin`")
+    await event.edit("`Axtarılır...`")
+    text = requests.get("https://combot.org/telegram/stickers?q=" + query).text
+    soup = BeautifulSoup(text, "lxml")
+    results = soup.find_all("div", {"class": "sticker-pack__header"})
+    if not results:
+        return await event.edit("**Nəticə tapılmadı**")
+    netice = f"**Axtarış:**\n `{query}`\n\n**Nəticələr:**\n"
+    for pack in results:
+        if pack.button:
+            packtitle = (pack.find("div", "sticker-pack__title")).get_text()
+            packlink = (pack.a).get("href")
+            reply += f" ➤ [{packtitle}]({packlink})\n\n"
+    await event.edit(netice)
+
 
 CmdHelp('stickers').add_command(
     'fırlat', None, (LANG['STIK1'])
@@ -413,4 +433,8 @@ CmdHelp('stickers').add_command(
     'stik', None, 'Fırlat əmrindən fərqli olaraq stickeri paket yaratmadan göndərər.'
 ).add_command(
     'q2',  '<söz>', 'Yazıları maraqlı stikerlərə çevirər'
+).add_command(
+    'q', '<rəqəm>', 'Yazını stikerə çevirər'
+).add_command(
+    'spack', '<söz>', 'Stiker paketi axtarışı edər'
 ).add()
