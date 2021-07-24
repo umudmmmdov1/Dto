@@ -411,4 +411,6 @@ CmdHelp('stickers').add_command(
     'spng', None, 'Stikeri png kimi göndərər.'
 ).add_command(
     'stik', None, 'Fırlat əmrindən fərqli olaraq stickeri paket yaratmadan göndərər.'
-).add_command('q2',  '<söz>', 'Yazıları maraqlı stikerlərə çevirər').add()
+).add_command(
+    'q2',  '<söz>', 'Yazıları maraqlı stikerlərə çevirər'
+).add()
