@@ -43,6 +43,8 @@
             "L": "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)",
             "X": "**Xəta baş verdi ❗**\n\n",
             "LO": "**ℹ️ Bu logu** {link} **göndərin.**\n",
+            "XE": "**⌨️ Əmr:** {dtotext}\n\n",
+            "LOG": "`Bağışlayın, UserBot'um çökdü.\nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`",
             "XO": "**Xətanın nə oluğunu öyrənin ✅**"
         },
 
