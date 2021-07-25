@@ -21,7 +21,7 @@ async def dil(event):
 
     komut = event.pattern_match.group(1)
     if search(r"y[uü]kl[eə]|install", komut):
-        await event.edit"(LANG['DİL1'])"
+        await event.edit("(LANG['DİL1'])")
         if event.is_reply:
             reply = await event.get_reply_message()
             dosya = await reply.download_media()
