@@ -81,9 +81,9 @@ def register(**args):
                     link = ((LANG['L']))
                     if len(dtotext)<10:
                         text += f"({LANG['XE']})"
-                    text += ((LANG['X']))
-                    text += f"({LANG['LO']})"
-                    text += ((LANG['XO']))
+                    text += (LANG['X'])
+                    text += f"(LANG['LO'])"
+                    text += (LANG['XO'])
                     
                     ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
                     ftext += "\nTarix: " + date
