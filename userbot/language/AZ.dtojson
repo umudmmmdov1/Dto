@@ -42,6 +42,12 @@
             "Dİl1": "`Dil faylı yüklənir, zəhmət olmasa gözləyin ⌛`"
         },
 
+       "extra": {
+            "T1": "`Fayl oxunur ⌛`",
+            "T2": "`Fayldakı mətn ölçüsü çox uzun olduğundan onu Dog Binə köçürəcəm ☺️`",
+            "T3": "`Təəssüf ki, Telegram bu ölçüdəki faylları dəstəkləmir ❌`\n**Buna görə də onu** [Dog Bin]({url})`ə köçürdüm ✅`"
+        },
+
         "__helpme": {
             "NO_BOT": "`Bot işləmir! Zəhmət olmasa Bot Tokeni və İstifadəçi adını düzgün yazın. Modul dayandırıldı.`"
         },
