@@ -168,8 +168,8 @@ async def dyno_usage(dyno):
 
     await asyncio.sleep(1.5)
 
-    return await dyno.edit("**⬇️ Dyno istifadəsi**:\n\n"
-                           f"⏳ `İstifadə etdiyi dyno saatı`\n**👤 App adı:****({HEROKU_APPNAME})**:\n"
+    return await dyno.edit("**⬇️ Dyno istifadə edilən app adı:** `({HEROKU_APPNAME})`\n\n"
+                           f"⏳ `İstifadə etdiyi dyno saatı`:\n\n"
                            f"     •  `{AppHours}` **saat**  `{AppMinutes}` **dəqiqə**  "
                            f"**|**  [`{AppPercentage}` **%**]"
                            "\n"
