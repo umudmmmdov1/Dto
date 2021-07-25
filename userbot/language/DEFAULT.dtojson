@@ -42,6 +42,26 @@
             "NO_BOT": "`Bot işləmir! Zəhmət olmasa Bot Tokeni və İstifadəçi adını düzgün yazın. Modul dayandırıldı.`"
         },
 
+       "extra": {
+            "T1": "`Fayl oxunur ⌛`",
+            "T2": "`Fayldakı mətn ölçüsü çox uzun olduğundan onu Dog Binə köçürəcəm ☺️`",
+            "T3": "`Təəssüf ki, Telegram bu ölçüdəki faylları dəstəkləmir ❌`\n**Buna görə də onu** [Dog Bin]({url})`ə köçürdüm ✅`",
+            "T4": "`Bir mətnə cavab verin`. \n**Məsələn:** `.tdoc <fayl adı>`",
+            "T5": "`ℹ️ Göndərəcək kanal seçin.`",
+            "T6": "`Belə bir kanal və ya qrup yoxdu 🥺\n❌ Xəta: {cie}`",
+            "T7": "`❌ Xəta: {e}`",
+            "T8": "`Mesaj {args} kanal/qrupuna göndərildi! ✅`",
+            "T9": "`Məlumatlar toplanılır... ⌛`",
+            "T10": "✉️ **Mesajlar:** {msg}\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`",
+            "TT1": "Cavab verdiyiniz faylı yazıya çevirər.",
+            "TT2": "<fayl adı>",
+            "TT3": "Cavab verdiyiniz mətni verdiyiniz addakı fayla çevirər.",
+            "TT4": "Cavab verdiyiniz faylı şəkilə çevirər.",
+            "TT5": "<göndəriləcək kanal> <cavab mesaj>",
+            "TT6": "Cavab verdiyiniz mesajı istədiyiniz kanal/qrupa göndərər.",
+            "TT7": "Söhbət haqqında ətraflı məlumat alın."
+        },
+
         "admin": {
             "PP_TOO_SMOL": "```Bu şəkil çox balacadır. Zəhmət olmasa daha böyük şəkil istifadə edin```",
             "PP_ERROR": "```Şəkil emal olunarkən bir xəta baş verdi.```",
