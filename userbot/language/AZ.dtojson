@@ -34,8 +34,8 @@
         },
         
         "__dto": {
-            "NEED_PLUGIN": "**Zəhmət olmasa bir** `U S Σ R Δ T O R` **modulu adı yazın.**",
-            "NEED_MODULE": "`Modullar aşağıdadır 👇🏻 \nİstifadəsi: .dto <modul adı>`"
+            "NEED_PLUGIN": "**❗️Zəhmət olmasa düzgün bir** `U S Σ R Δ T O R` **modulu qeyd edin.**\n**ℹ️ Hansısa plugin haqqında məlumat lazımdırsa, əvvəlcə plugini yüklədiyinizdən əmin olun.**",
+            "NEED_MODULE": "`Modullar aşağıdadır ⬇️ \nİstifadəsi: .dto <modul adı>`"
         },
 
        "extra": {
