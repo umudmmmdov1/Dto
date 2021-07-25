@@ -26,9 +26,9 @@ async def doc2text(event):
     fayl = open(doc, "r")
     readed = fayl.read()
     fayl.close()
-    fayl = await event.reply("(LANG['T1'])")
+    fayl = await event.reply((LANG['T1']))
     if len(readed) >= 4096:            
-            await event.edit("(LANG['T2'])")
+            await event.edit((LANG['T2']))
             out = readed
             url = "https://del.dog/documents"
             r = requests.post(url, data=out.encode("UTF-8")).json()
