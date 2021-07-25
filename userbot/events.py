@@ -75,7 +75,7 @@ def register(**args):
                     if len(dtotext)<10:
                         text += f"⌨️ **Əmr:** {dtotext}\n\n"
                     text += "**Xəta baş verdi ❗**\n"
-                    text += f"**Bu log'u** {link} **göndərin.**"
+                    text += f"**ℹ️ Bu log'u** {link} **göndərin.**"
                     text += "**Xətanın nə oluğunu öyrənin**\n"
                     
                     ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
