@@ -80,8 +80,8 @@ def register(**args):
                     text = "**✥ U S Σ R Δ T O R ΣRROR ✥**\n\n"
                     link = ((LANG['L']))
                     if len(dtotext)<10:
-                    text += f"({LANG['X']})"
                         text += f"**⌨️ Əmr:** {dtotext}\n\n"
+                    text += ((LANG['X']))
                     text += f"**ℹ️ Bu logu** {link} göndərin.**\n"
                     text += "**Xətanın nə oluğunu öyrənin ✅**"
                     
