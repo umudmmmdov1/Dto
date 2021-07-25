@@ -38,20 +38,6 @@
             "NEED_MODULE": "`Modullar aşağıdadır 👇🏻 \nİstifadəsi: .dto <modul adı>`"
         },
 
-        "event": {
-            "Q": "`Bunun bir qrup olduğunu düşünmürəm 🤷🏻‍♂️`",
-            "L": "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)",
-            "X": "**Xəta baş verdi ❗**\n\n",
-            "LO": "**ℹ️ Bu logu** {link} **göndərin.**\n",
-            "XE": "**⌨️ Əmr:** {dtotext}\n\n",
-            "LOG": "`Bağışlayın, UserBot'um çökdü.\nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`",
-            "XO": "**Xətanın nə oluğunu öyrənin ✅**"
-        },
-
-        "dil": {
-            "Dİl1": "`Dil faylı yüklənir, zəhmət olmasa gözləyin ⌛`"
-        },
-
        "extra": {
             "T1": "`Fayl oxunur ⌛`",
             "T2": "`Fayldakı mətn ölçüsü çox uzun olduğundan onu Dog Binə köçürəcəm ☺️`",
@@ -62,13 +48,13 @@
             "T7": "`❌ Xəta: {e}`",
             "T8": "`Mesaj {args} kanal/qrupuna göndərildi! ✅`",
             "T9": "`Məlumatlar toplanılır... ⌛`",
-            "T10": "✉️ **Mesajlar:** `{msg}`\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`",
-            "TT1": "Cavab verdiyiniz faylı yazıya çevirər ✅",
+            "T10": "✉️ **Mesajlar:** {msg}\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`",
+            "TT1": "Cavab verdiyiniz faylı yazıya çevirər.",
             "TT2": "<fayl adı>",
-            "TT3": "Cavab verdiyiniz mətni verdiyiniz addakı fayla çevirər",
-            "TT4": "Cavab verdiyiniz faylı şəkilə çevirər",
+            "TT3": "Cavab verdiyiniz mətni verdiyiniz addakı fayla çevirər.",
+            "TT4": "Cavab verdiyiniz faylı şəkilə çevirər.",
             "TT5": "<göndəriləcək kanal> <cavab mesaj>",
-            "TT6": "Cavab verdiyiniz mesajı istədiyiniz kanal/qrupa göndərər",
+            "TT6": "Cavab verdiyiniz mesajı istədiyiniz kanal/qrupa göndərər.",
             "TT7": "Söhbət haqqında ətraflı məlumat alın."
         },
 
