@@ -78,11 +78,11 @@ def register(**args):
 
                     dtotext = str(check.text)
                     text = "**✥ U S Σ R Δ T O R ΣRROR ✥**\n\n"
-                    link = ((LANG['L']))
+                    link = (LANG['L'])
                     if len(dtotext)<10:
-                        text += f"({LANG['XE']})"
+                        text += (LANG['XE'])
                     text += (LANG['X'])
-                    text += f"(LANG['LO'])"
+                    text += (LANG['LO'])
                     text += (LANG['XO'])
                     
                     ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
