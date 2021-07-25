@@ -32,8 +32,8 @@
             "DTO_PLUGIN_CAPTION": "This is a plugin of [U S Σ R Δ T O R](https://t.me/UseratorOT)."
         },
         "__dto": {
-            "NEED_PLUGIN": "Please specify an U S Σ R Δ T O R module name.",
-            "NEED_MODULE": "Modules are below 👇🏻\nUse: .dto <module name>"
+            "NEED_PLUGIN": "**❗️ Please enter the correct** `U S Σ R Δ T O R` **module name.**\n**ℹ️ If you want information about any plugin, make sure the plugin is installed.**",
+            "NEED_MODULE": "Modules are below ⬇️\nUse: .dto <module name>"
         },        
        "extra": {
             "T1": "`Fayl oxunur ⌛`",
