@@ -123,7 +123,7 @@ async def stats(e):
    geo = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterGeo())).total) 
    kntk = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterContacts())).total) 
    
-   stat = (f"{LANG['T10']}")
+   stat = f"({LANG['T10']})"
    await e.edit(stat)
 
 
