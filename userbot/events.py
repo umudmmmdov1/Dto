@@ -80,10 +80,10 @@ def register(**args):
                     text = "**✥ U S Σ R Δ T O R ΣRROR ✥**\n\n"
                     link = ((LANG['L']))
                     if len(dtotext)<10:
-                        text += f"**⌨️ Əmr:** {dtotext}\n\n"
+                        text += f"({LANG['XE']})"
                     text += ((LANG['X']))
-                    text += f"**ℹ️ Bu logu** {link} göndərin.**\n"
-                    text += "**Xətanın nə oluğunu öyrənin ✅**"
+                    text += f"({LANG['LO']})"
+                    text += ((LANG['XO']))
                     
                     ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
                     ftext += "\nTarix: " + date
@@ -115,8 +115,7 @@ def register(**args):
                     file.close()
 
                     if LOGSPAMMER:
-                        await check.client.respond("`Bağışlayın, UserBot'um çökdü.\
-                        \nXəta Günlükləri UserBot günlük qrupunda saxlanılır.`")
+                        await check.client.respond((LANG['LOG']))
 
                     await check.client.send_file(send_to,
                                                  "ΣRROR.log",
