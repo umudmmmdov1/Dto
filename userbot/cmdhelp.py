@@ -76,9 +76,9 @@ class CmdHelp:
                 result += f"🔗 `{PATTERNS[:1]}{command['command']} {command['params']}`\n"
                 
             if command['example'] == None:
-                result += f"ℹ️ `{command['usage']}`\n\n"
+                result += f"ℹ️ __{command['usage']}__\n\n"
             else:
-                result += f"ℹ️ `{command['usage']}`\n"
+                result += f"ℹ️ __{command['usage']}__\n"
                 result += f"➤ `{PATTERNS[:1]}{command['example']}`\n\n"
         return result
 
