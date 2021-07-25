@@ -101,11 +101,11 @@ async def send(event):
           await event.edit((LANG['T5']))
         try: kanal = await event.client.get_input_entity(int(args) if re.match(r'-{0,1}\d+', args) else args)
         except cie:
-          await event.edit((LANG['T6']))
+          await event.edit(f"{LANG['T6']}")
         except Exception as e:
-          await event.edit((LANG['T7']))
+          await event.edit(f"{LANG['T7']}")
         v = await event.client.send_message(kanal, mesaj)
-        await event.edit((LANG['T8']))
+        await event.edit(f"{LANG['T8']}")
 
 
 @register(outgoing=True, pattern="^.statis")
@@ -123,7 +123,7 @@ async def stats(e):
    geo = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterGeo())).total) 
    kntk = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterContacts())).total) 
    
-   stat = ((LANG['T10']))
+   stat = (f"{LANG['T10']}")
    await e.edit(stat)
 
 
