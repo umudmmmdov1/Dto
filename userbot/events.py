@@ -12,6 +12,13 @@ from telethon import events
 from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
 
 
+# ██████ LANGUAGE CONSTANTS ██████ #
+
+from userbot.language import get_value
+LANG = get_value("event")
+
+# ████████████████████████████████ #
+
 def register(**args):
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
@@ -54,7 +61,7 @@ def register(**args):
                 return
              
             if groups_only and not check.is_group:
-                await check.respond("`Bunun bir qrup olduğunu düşünmürəm.`")
+                await check.respond((LANG['Q']))
                 return
 
             try:
@@ -71,12 +78,12 @@ def register(**args):
 
                     dtotext = str(check.text)
                     text = "**✥ U S Σ R Δ T O R ΣRROR ✥**\n\n"
-                    link = "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)"
+                    link = ((LANG['L']))
                     if len(dtotext)<10:
-                        text += f"⌨️ Əmr: {dtotext}\n\n"
-                    text += "Xəta baş verdi 🤷🏻‍♂️\n"
-                    text += f"ℹ️ Bu log'u {link} göndərin.\n"
-                    text += "Xətanın nə oluğunu öyrənin ✅"
+                    text += ((LANG['X']))
+                        text += f"**⌨️ Əmr:** {dtotext}\n\n"
+                    text += f"**ℹ️ Bu logu** {link} göndərin.**\n"
+                    text += "**Xətanın nə oluğunu öyrənin ✅**"
                     
                     ftext = "--------U S Σ R Δ T O R ΣRROR--------\n"
                     ftext += "\nTarix: " + date
