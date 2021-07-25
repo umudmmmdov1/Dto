@@ -116,7 +116,7 @@ async def upstream(ups):
             remove("UPDΔTΣ.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond("Botunuz U S Σ R Δ T O R tərəfindən yenilənir")
+        await ups.respond('`Botunuz U S Σ R Δ T O R tərəfindən yenilənir`')
         return
 
     if force_update:
