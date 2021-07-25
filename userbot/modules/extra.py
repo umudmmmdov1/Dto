@@ -47,7 +47,7 @@ async def doc2text(event):
 async def text2doc(event):
     metn = event.text[5:]
     if metn is None:
-        await event.edit("`Bir mətnə cavab verin`. \n**Məsələn:** `.tdoc <fayl adı>`")
+        await event.edit((LANG['T4']))
         return
     cvb = await event.get_reply_message()
     if cvb.text:
@@ -57,7 +57,7 @@ async def text2doc(event):
         await event.client.send_file(event.chat_id, metn, caption="[U S Σ R Δ T O R](t.me/UseratorSUP)", force_document=True)
         os.remove(metn)
     else:
-        await event.edit("`Bir mətnə cavab verin`. \n**Məsələn:** `.tdoc <fayl adı>`")
+        await event.edit((LANG['T4']))
 
 
 @register(outgoing=True, pattern="^.ftoi")
@@ -98,19 +98,19 @@ async def send(event):
         args = event.pattern_match.group(1)
         mesaj = await event.get_reply_message()
         if not args:
-          await event.edit("Göndərəcək kanal seçin")
+          await event.edit((LANG['T5']))
         try: kanal = await event.client.get_input_entity(int(args) if re.match(r'-{0,1}\d+', args) else args)
         except cie:
-          await event.edit(f"Belə bir kanal və ya qrup yoxdu\nXəta: {cie}")
+          await event.edit((LANG['T6']))
         except Exception as e:
-          await event.edit(f"Xəta: {e}")
+          await event.edit((LANG['T7']))
         v = await event.client.send_message(kanal, mesaj)
-        await event.edit(f"Mesaj {args} kanal/qrupuna göndərildi!")
+        await event.edit((LANG['T8']))
 
 
 @register(outgoing=True, pattern="^.statis")
 async def stats(e): 
-   await e.edit("`Məlumatlar toplanılır...`") 
+   await e.edit((LANG['T9'])) 
    msg = str((await e.client.get_messages(e.chat_id, limit=0)).total) 
    img = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterPhotos())).total) 
    vid = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterVideo())).total)
@@ -123,16 +123,16 @@ async def stats(e):
    geo = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterGeo())).total) 
    kntk = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterContacts())).total) 
    
-   stat = f"✉️ **Mesajlar:** `{msg}`\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`"
+   stat = ((LANG['T10']))
    await e.edit(stat)
 
 
 CmdHelp('extra').add_command(
-  'ttext', None, 'Cavab verdiyiniz faylı yazıya çevirər'
+  'ttext', None, (LANG['TT1'])
 ).add_command(
-  'tdoc', '<fayl adı>', 'Cavab verdiyiniz mətni verdiyiniz addakı fayla çevirər'
+  'tdoc', (LANG['TT2']), (LANG['TT3'])
 ).add_command(
-  'ftoi', None, 'Cavab verdiyiniz faylı şəkilə çevirər'
+  'ftoi', None, (LANG['TT4'])
 ).add_command(
-  'post', '<göndəriləcək kanal> <cavab mesaj>', 'Cavab verdiyiniz mesajı istədiyiniz kanal/qrupa göndərər'
-).add_command('statis',  None, 'Söhbət haqqında ətraflı məlumat alın').add()
+  'post', (LANG['TT5']), (LANG['TT6'])
+).add_command('statis',  None, (LANG['TT7'])).add()
