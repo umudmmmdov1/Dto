@@ -22,10 +22,10 @@ async def dto(event):
             await event.edit(LANG["NEED_PLUGIN"])
     else:
         string = ""
-        sayfa = [sorted(list(CMD_HELP))[i:i + 3] for i in range(0, len(sorted(list(CMD_HELP))), 3)]
+        sayfa = [sorted(list(CMD_HELP))[i:i + 3] for i in range(0, len(sorted(list(CMD_HELP))), 4)]
         
         for i in sayfa:
-            string += f'`💟 `'
+            string += f'__💟 __'
             for sira, a in enumerate(i):
                 string += "__" + str(a)
                 if sira == i.index(i[-1]):
