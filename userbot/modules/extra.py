@@ -13,21 +13,28 @@ from userbot.cmdhelp import CmdHelp
 from userbot.events import register
 from userbot import bot
 
+# ██████ LANGUAGE CONSTANTS ██████ #
+
+from userbot.language import get_value
+LANG = get_value("extra")
+
+# ████████████████████████████████ #
+
 @register(pattern="^.ttext", outgoing=True)
 async def doc2text(event):
     doc = await event.client.download_media(await event.get_reply_message())
     fayl = open(doc, "r")
     readed = fayl.read()
     fayl.close()
-    fayl = await event.reply("`Fayl oxunur...`")
+    fayl = await event.reply("(LANG['T1'])")
     if len(readed) >= 4096:            
-            await event.edit("`Fayldakı mətn ölçüsü çox uzun olduğundan onu Dog Binə köçürəcəm`")
+            await event.edit("(LANG['T2'])")
             out = readed
             url = "https://del.dog/documents"
             r = requests.post(url, data=out.encode("UTF-8")).json()
             url = f"https://del.dog/{r['key']}"
             await event.edit(
-                f" Təəssüf ki, Telegram bu ölçüdəki faylları dəstəkləmir\n**Buna görə də onu** [Dog Bin]({url})’ə köçürdüm", link_preview=False)            
+                f"(LANG['T3'])", link_preview=False)            
             await fayl.delete()
     else:
         await event.client.send_message(event.chat_id, f"{readed}")
