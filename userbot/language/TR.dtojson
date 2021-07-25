@@ -34,7 +34,7 @@
         },
         
         "__dto": {
-            "NEED_PLUGIN": "**❗️Lütfen doğru bir** `U S Σ R Δ T O R` **modülü belirtin.**\n**ℹ️ Hərhangi plugin hakkında bilgi lazımsa, ilk önce plugini indirdiğinizden emin olun.**",
+            "NEED_PLUGIN": "**❗️Lütfen doğru bir** `U S Σ R Δ T O R` **modülü belirtin.**\n**ℹ️ Herhangi plugin hakkında bilgi lazımsa, ilk önce plugini indirdiğinizden emin olun.**",
             "NEED_MODULE": "`Modullar aşağıdadır ⬇️\nKullanım: .dto <modül adı>`"
         },
    
