@@ -38,6 +38,12 @@
             "NEED_MODULE": "`Modullar aşağıdadır 👇🏻 \nİstifadəsi: .dto <modul adı>`"
         },
 
+        "event": {
+            "Q": "`Bunun bir qrup olduğunu düşünmürəm 🤷🏻‍♂️`",
+            "L": "[U S Σ R Δ T O R Dəstək Qrupuna](https://t.me/UseratorSup)",
+            "X": "**Xəta baş verdi ❗**\n\n"
+        },
+
         "dil": {
             "Dİl1": "`Dil faylı yüklənir, zəhmət olmasa gözləyin ⌛`"
         },
