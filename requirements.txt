@@ -53,6 +53,7 @@ numpy
 Pillow
 telegraph
 lottie
+moviepy
 git+https://github.com/Joeclinton1/google-images-download.git
 emojify
 pydub
