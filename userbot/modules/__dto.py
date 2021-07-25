@@ -27,9 +27,9 @@ async def dto(event):
         for i in sayfa:
             string += f'`💟 `'
             for sira, a in enumerate(i):
-                string += "`" + str(a)
+                string += "__" + str(a)
                 if sira == i.index(i[-1]):
-                    string += "`"
+                    string += "__"
                 else:
                     string += "`, "
             string += "\n"
