@@ -301,34 +301,6 @@ async def ban_user(chat_id, i, rights):
         return False, str(exc)
 
 
-
-@register(outgoing=True, pattern="^.kickall$", groups_only=True)
-async def kickall(event):
-    result = await event.client(
-        functions.channels.GetParticipantRequest(event.chat_id))
-    if not result.participant.admin_rights.ban_users:
-        return await event.edit("`Deyəsən bu qrupda ban icazəm yoxdu 🦍.`")
-    event = await edit_or_reply(event, "`Çıxarılır...`")
-    admins = await event.client.get_participants(
-        event.chat_id, filter=ChannelParticipantsAdmins
-    )
-    admins_id = [i.id for i in admins]
-    total = 0
-    success = 0
-    async for user in event.client.iter_participants(event.chat_id):
-        total += 1
-        try:
-            if user.id not in admins_id:
-                await event.client.kick_participant(event.chat_id, user.id)
-                success += 1
-                await sleep(0.5)
-        except Exception as e:
-            LOGS.info(str(e))
-            await sleep(0.5)
-    await event.edit(
-        f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\nKICKALL prosesi tamamlandı\n`{success}` istifadəçidən `{total}` nəfəri qrupdan çıxarıldı.")
-
-
 @register(outgoing=True, pattern="^.banall$", groups_only=True)
 async def banall(event):
     result = await bot(
@@ -401,7 +373,6 @@ async def _(event):
 
 Help = CmdHelp('qrup')
 Help.add_command('qrup',  None, 'Qrup haqqında məlumat verər').add()
-Help.add_command('addmembers', '@qrupadi', 'Qrupda adam sayısını çoxaltmaq üçün artıracağınız qrupda .addmembers @kopyalamaqistediyiniz qrup tağını yazın.').add()
+Help.add_command('addmember', '@qrupadi', 'Qrupda adam sayısını çoxaltmaq üçün artıracağınız qrupda .addmember @kopyalamaqistediyiniz qrup tağını yazın.').add()
 Help.add_command('banall',  None, 'Qrupdan hərkəsi banlayar').add()
-Help.add_command('kickall',  None, 'Qrupdan hərkəsi atar').add()
 Help.add_command('unbanall',  None, 'Qrupda hərkəsi bandan çıxarat').add()
