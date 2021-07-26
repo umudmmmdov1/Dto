@@ -10,6 +10,95 @@ from math import sqrt
 from telethon.tl.functions.channels import GetFullChannelRequest, GetParticipantsRequest
 from telethon.utils import get_input_location
 from userbot.cmdhelp import CmdHelp
+import asyncio
+from asyncio import sleep
+from telethon.errors import (
+    ChannelInvalidError,
+    ChannelPrivateError,
+    ChannelPublicGroupNaError,
+)
+from telethon.tl import functions
+from asyncio import sleep
+from telethon.errors import (
+    ChatAdminRequiredError,
+    FloodWaitError,
+    MessageNotModifiedError,
+    UserAdminInvalidError,
+)
+from telethon.tl import functions
+from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.types import (
+    ChannelParticipantsAdmins,
+    ChannelParticipantsKicked,
+    ChatBannedRights,
+)
+import logging
+from telethon.tl.functions.channels import GetFullChannelRequest
+from telethon.tl.functions.messages import GetFullChatRequest
+from userbot.modules.qrup import get_chatinfo
+from userbot import bot, BOTLOG, BOTLOG_CHATID, SUDO_ID
+
+
+def make_mention(user):
+    if user.username:
+        return f"@{user.username}"
+    else:
+        return inline_mention(user)
+
+def inline_mention(user):
+    full_name = user_full_name(user) or "No Name"
+    return f"[{full_name}](tg://user?id={user.id})"
+
+def user_full_name(user):
+    names = [user.first_name, user.last_name]
+    names = [i for i in list(names) if i]
+    full_name = " ".join(names)
+    return full_name
+
+
+@register(outgoing=True, pattern="^.addmember ?(.*)", groups_only=True, disable_errors=True)
+@register(incoming=True, from_users=SUDO_ID, pattern="^.addmember ?(.*)", disable_errors=True)
+async def addmember(event):
+    sender = await event.get_sender()
+    me = await event.client.get_me()
+    if not sender.id == me.id:
+        await event.reply("`Məlumatlar hazırlanır...`")
+    else:
+        await event.edit("`Məlumatlar hazırlanır...`")
+    usrtr = await get_chatinfo(event)
+    chat = await event.get_chat()
+    if event.is_private:
+        return await event.edit("`Bura istifadəçi əlavə edə bilmərəm 🦍`")
+    s = 0
+    f = 0
+    error = "None"
+
+    await event.edit("[U S Σ R Δ T O R]:\n\n`İstifadəçilər toplanılır...`")
+    async for user in bot.iter_participants(usrtr.full_chat.id):
+        try:
+            if error.startswith("Too"):
+                await event.edit(
+                    f"[U S Σ R Δ T O R]\nXəta baş verdi və proses dayandırıldı(`Telethon limiti keçildi, daha sonra yenidən cəhd edin`)\n**Xəta** : \n`{error}`\n\n✔️ `{s}` nəfər dəvət olundu\n❌ `{f}`  nəfər dəvət edilə bilmədi")
+                if BOTLOG_CHATID is not None:
+                    await bot.send_message(BOTLOG_CHATID, "#ADDMEMBER\n"
+            f"UĞURLU**{s}** hesab(lar) !!\
+            \nUĞURSUZ **{f}** hesab(lar) !!\
+            \nCHAT: {event.chat.title}(`{event.chat_id}`)")
+            await bot(
+                functions.channels.InviteToChannelRequest(channel=chat, users=[user.id])
+            )
+            s = s + 1
+            await sleep(1.5)
+            await event.edit(
+                f"[U S Σ R Δ T O R]:\n\n•İstifadəçilər dəvət olunur...\n•  **Uğursuz:** `{f}` nəfər\n\n**×Son Uğursuz:** `{error}`"
+            )
+            asyncio.sleep(2.5)
+        except Exception as e:
+            error = str(e)
+            f = f + 1
+    return await event.edit(
+        f"[U S Σ R Δ T O R]: \n\n✔️ `{s}` nəfər {event.chat.title} qrupuna dəvət olundu\n❌ {f} nəfər dəvət edilə bilmədi "
+    )
 
 @register(outgoing=True, pattern="^.qrup(?: |$)(.*)")
 async def info(event):
@@ -191,4 +280,129 @@ async def fetch_info(chat, event):
         caption += f"Açıqlama: \n<code>{description}</code>\n"
     return caption    
 
-CmdHelp('qrup').add_command('qrup', None, 'Qrup haqqında məlumat göstərir.').add()
+LOGS = logging.getLogger(__name__)
+BANNED_RIGHTS = ChatBannedRights(
+    until_date=None,
+    view_messages=True,
+    send_messages=True,
+    send_media=True,
+    send_stickers=True,
+    send_gifs=True,
+    send_games=True,
+    send_inline=True,
+    embed_links=True,
+)
+
+
+async def ban_user(chat_id, i, rights):
+    try:
+        await bot(functions.channels.EditBannedRequest(chat_id, i, rights))
+        return True, None
+    except Exception as exc:
+        return False, str(exc)
+
+
+
+@register(outgoing=True, pattern="^.kickall$", groups_only=True)
+async def kickall(event):
+    result = await event.client(
+        functions.channels.GetParticipantRequest(event.chat_id))
+    if not result.participant.admin_rights.ban_users:
+        return await event.edit("`Deyəsən bu qrupda ban icazəm yoxdu 🦍.`")
+    event = await edit_or_reply(event, "`Çıxarılır...`")
+    admins = await event.client.get_participants(
+        event.chat_id, filter=ChannelParticipantsAdmins
+    )
+    admins_id = [i.id for i in admins]
+    total = 0
+    success = 0
+    async for user in event.client.iter_participants(event.chat_id):
+        total += 1
+        try:
+            if user.id not in admins_id:
+                await event.client.kick_participant(event.chat_id, user.id)
+                success += 1
+                await sleep(0.5)
+        except Exception as e:
+            LOGS.info(str(e))
+            await sleep(0.5)
+    await event.edit(
+        f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\nKICKALL prosesi tamamlandı\n`{success}` istifadəçidən `{total}` nəfəri qrupdan çıxarıldı.")
+
+
+@register(outgoing=True, pattern="^.banall$", groups_only=True)
+async def banall(event):
+    result = await bot(
+        functions.channels.GetParticipantRequest(event.chat_id))
+    if not result:
+        return await event.edit("`Deyəsən bu qrupda ban icazəm yoxdu 🦍.`")
+    event = await edit_or_reply(event, "`Ban edilir...`")
+    admins = await event.client.get_participants(
+        event.chat_id, filter=ChannelParticipantsAdmins
+    )
+    admins_id = [i.id for i in admins]
+    total = 0
+    success = 0
+    async for user in event.client.iter_participants(event.chat_id):
+        total += 1
+        try:
+            if user.id not in admins_id:
+                await event.client(
+                    EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
+                )
+                success += 1
+                await sleep(0.5)
+        except Exception as e:
+            LOGS.info(str(e))
+            await sleep(0.5)
+    await catevent.edit(
+        f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\nBANALL prosesi tamamlandı\n`{success}` istifadəçidən `{total}` nəfəri qrupdan ban edildi."
+    )
+
+
+@register(outgoing=True, pattern="^.unbanall$", groups_only=True)
+async def _(event):
+    event = await event.edit("`Bandakı bütün istifadəçilər bandan çıxardılır...`"
+    )
+    succ = 0
+    total = 0
+    flag = False
+    chat = await event.get_chat()
+    async for i in event.client.iter_participants(
+        event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
+    ):
+        total += 1
+        rights = ChatBannedRights(until_date=0, view_messages=False)
+        try:
+            await event.client(
+                functions.channels.EditBannedRequest(event.chat_id, i, rights)
+            )
+        except FloodWaitError as e:
+            LOGS.warn(f"{e.seconds} saniyəlik flood")
+            await event.edit(
+                f"{e.seconds} saniyədən sonra yenidən davam ediləcək..."
+            )
+            await sleep(e.seconds + 5)
+        except Exception as ex:
+            await event.edit(str(ex))
+        else:
+            succ += 1
+            if flag:
+                await sleep(2)
+            else:
+                await sleep(1)
+            try:
+                if succ % 10 == 0:
+                    await event.edit(
+                        f"__İstifadəçilər bandan çıxardılır...__\n\nHazırda `{succ}` hesab bandan çıxardılıb")
+            except MessageNotModifiedError:
+                pass
+    await event.edit(f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\nUNBANALL prosesi tamamlandı\n`{chat.title}` **qrupunda** `{succ}/{total}` **istifadəçi bandan çıxardıldı**")
+
+
+Help = CmdHelp('qrup')
+Help.add_command('qrup',  None, 'Qrup haqqında məlumat verər').add()
+Help.add_command('addmembers', '@qrupadi', 'Qrupda adam sayısını çoxaltmaq üçün artıracağınız qrupda .addmembers @kopyalamaqistediyiniz qrup tağını yazın.').add()
+Help.add_command('banall',  None, 'Qrupdan hərkəsi banlayar').add()
+Help.add_command('kickall',  None, 'Qrupdan hərkəsi atar').add()
+Help.add_command('unbanall',  None, 'Qrupda hərkəsi bandan çıxarat').add()
