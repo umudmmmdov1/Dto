@@ -169,12 +169,12 @@ async def pins(event):
             if re.search(r'CmdHelp\(.*\)', dosy):
                 cmdhelp = re.findall(r"CmdHelp\([\"'](.*)[\"']\)", dosy)[0]
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'**Modul uğurla yükləndi!**\n__Modulun əmrlər və işlədilişi haqqında məlumat almaa üçün__ `.dto {cmdhelp}` __yazın.__')
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n__`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`)
             else:
                 dosyaAdi = reply_message.file.name.replace('.py', '')
                 extractCommands(dosya)
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'**Modul uğurla yükləndi!**\n__Modulun əmrləri və işlədilişi haqqında məlumat almaq üçün__ `.dto {dosyaAdi}` __yazın.__')
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n__`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`)
 
 @register(outgoing=True, pattern="^.premove ?(.*)")
 async def premove(event):
