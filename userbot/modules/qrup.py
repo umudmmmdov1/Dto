@@ -33,7 +33,6 @@ from telethon.tl.types import (
     ChatBannedRights,
 )
 import logging
-from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest
 from userbot import bot, BOTLOG, BOTLOG_CHATID, SUDO_ID
 
