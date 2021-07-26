@@ -53,6 +53,35 @@ def user_full_name(user):
     full_name = " ".join(names)
     return full_name
 
+LOGS = logging.getLogger(__name__)
+NO_ADMIN = "`Bunun üçün admin olmalısan!`"
+
+@register(outgoing=True, pattern="^.banall$", groups_only=True)
+async def banall(event):
+    chat = await event.get_chat()
+    admin = chat.admin_rights
+    creator = chat.creator
+    if not admin and not creator:
+        await event.edit(NO_ADMIN)
+    await event.edit("`Bütün istifadəçilər banlanır...`")
+    me = await event.client.get_me()
+    all_participants = await event.client.get_participants(event.chat_id)
+    for user in all_participants:
+        if user.id == me.id:
+            pass
+        try:
+            await event.client(EditBannedRequest(
+                event.chat_id, int(user.id), ChatBannedRights(
+                    until_date=None,
+                    view_messages=True
+                )
+            ))
+            sleep(1.1)
+        except Exception as e:
+            await event.reply(str(e))
+        await asyncio.sleep(0.3)
+    await event.edit(f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\n`BANALL prosesi tamamlandı`")
+
 
 @register(outgoing=True, pattern="^.addmember ?(.*)", groups_only=True, disable_errors=True)
 @register(incoming=True, from_users=SUDO_ID, pattern="^.addmember ?(.*)", disable_errors=True)
@@ -298,36 +327,6 @@ async def ban_user(chat_id, i, rights):
         return True, None
     except Exception as exc:
         return False, str(exc)
-
-
-@register(outgoing=True, pattern="^.banall$", groups_only=True)
-async def banall(event):
-    result = await bot(
-        functions.channels.GetParticipantRequest(event.chat_id))
-    if not result:
-        return await event.edit("`Deyəsən bu qrupda ban icazəm yoxdu 🦍.`")
-    event = await edit_or_reply(event, "`Ban edilir...`")
-    admins = await event.client.get_participants(
-        event.chat_id, filter=ChannelParticipantsAdmins
-    )
-    admins_id = [i.id for i in admins]
-    total = 0
-    success = 0
-    async for user in event.client.iter_participants(event.chat_id):
-        total += 1
-        try:
-            if user.id not in admins_id:
-                await event.client(
-                    EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
-                )
-                success += 1
-                await sleep(0.5)
-        except Exception as e:
-            LOGS.info(str(e))
-            await sleep(0.5)
-    await catevent.edit(
-        f"[[U S Σ R Δ T O R](t.me/UseratorOT)]:\nBANALL prosesi tamamlandı\n`{success}` istifadəçidən `{total}` nəfəri qrupdan ban edildi."
-    )
 
 
 @register(outgoing=True, pattern="^.unbanall$", groups_only=True)
