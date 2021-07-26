@@ -123,7 +123,7 @@ async def stats(e):
    geo = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterGeo())).total) 
    kntk = str((await e.client.get_messages(e.chat_id, limit=0, filter=InputMessagesFilterContacts())).total) 
    
-   stat = f"({LANG['T10']})"
+   stat = f"T10": "✉️ **Mesajlar:** `{msg}`\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`"
    await e.edit(stat)
 
 
