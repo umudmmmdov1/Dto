@@ -48,7 +48,6 @@
             "T7": "`❌ Xəta: {e}`",
             "T8": "`Mesaj {args} kanal/qrupuna göndərildi! ✅`",
             "T9": "`Məlumatlar toplanılır... ⌛`",
-            "T10": "✉️ **Mesajlar:** {msg}\n🖼️ **Fotolar:** `{img}`\n📹 **Videolar:** `{vid}`\n🎵 **Musiqilər:** `{msc}`\n🎤 **Səsli mesajlar:** `{ses}`\n🎥 **Video Notlar:** `{rvid}`\n📂 **Fayllar:** `{doc}`\n🔗 **Linklər:** `{url}`\n🎞️ **GIF'lər:** `{gif}`\n🗺 **Yerlər:** `{geo}`\n🛂 **Kontaktlar:** `{kntk}`",
             "TT1": "Cavab verdiyiniz faylı yazıya çevirər.",
             "TT2": "<fayl adı>",
             "TT3": "Cavab verdiyiniz mətni verdiyiniz addakı fayla çevirər.",
