@@ -160,7 +160,7 @@ async def pins(event):
             if re.search(r'CmdHelp\(.*\)', dosy):
                 cmdhelp = re.findall(r"CmdHelp\([\"'](.*)[\"']\)", dosy)[0]
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'**Modul uğurla yükləndi!**\n__Modulun əmrləri və işlədilişi haqqında məlumat almaq üçün__ `.dto {cmdhelp}` __yazın.__')
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
             else:
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
                 userbot.cmdhelp.CmdHelp(dosya).add_warning('Əmrlər tapılmadı!').add()
@@ -169,12 +169,12 @@ async def pins(event):
             if re.search(r'CmdHelp\(.*\)', dosy):
                 cmdhelp = re.findall(r"CmdHelp\([\"'](.*)[\"']\)", dosy)[0]
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n__`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`)
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
             else:
                 dosyaAdi = reply_message.file.name.replace('.py', '')
                 extractCommands(dosya)
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n__`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`)
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
 
 @register(outgoing=True, pattern="^.premove ?(.*)")
 async def premove(event):
@@ -238,5 +238,4 @@ async def ptest(event):
         await event.edit(f"{LANG['PLUGIN_BUGGED']} {e}`")
         return os.remove("./userbot/temp_plugins/" + dosya)
 
-    return await event.edit(f'**Modul uğurla yükləndi!**\
-    \n__Modul yoxlaması edə bilərsiz. Botu yenidən başlatdığınızda plugin işləməyəcək.__')
+    return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Ama əmri tapa bilmədim bot yenidən başladıldıqda plugin silinəcək` `)
