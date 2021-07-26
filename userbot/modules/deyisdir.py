@@ -16,7 +16,7 @@ LANG = get_value("deyisdir")
 # ████████████████████████████████ #
 
 @register(outgoing=True, pattern="^.change ?(.*)")
-@register(outgoing=True, pattern="^.deyisdir ?(.*)")
+@register(outgoing=True, pattern="^.d[eə]i[sş]dir ?(.*)")
 @register(outgoing=True, pattern="^.değiştir ?(.*)")
 async def degistir(event):
     plugin = event.pattern_match.group(1)
@@ -30,7 +30,7 @@ async def degistir(event):
         mesaj = []
 
     plugin = plugin.strip()
-    TURLER = ["afk", "alive", "pm", "kickme", "dızcı", "ban", "mute", "approve", "disapprove", "block"]
+    TURLER = ["afk", "alive", "pm", "kickme", "dızcı", "ban", "mute", "approve", "disapprove", "block", "restart"]
     if type(mesaj) == list:
         if plugin in TURLER:
             if event.is_reply:
@@ -51,7 +51,7 @@ async def degistir(event):
             else:
                 await event.edit(f"{LANG['ERROR_DELETED']}: `{silme}`")
         else:
-            await event.edit(LANG['NOT_FOUND'] + ":`afk/alive/pm/kickme/dızcı/ban/mute/approve/disapprove/block`")
+            await event.edit(LANG['NOT_FOUND'] + ":`afk/alive/pm/kickme/dızcı/ban/mute/approve/disapprove/block/restart`")
     elif len(plugin) < 1:
         await event.edit(LANG['USAGE'])
     elif type(mesaj) == str:
@@ -64,7 +64,7 @@ async def degistir(event):
                 sql.ekle_mesaj(plugin, mesaj)
                 await event.edit(LANG['SETTED'].format(plu=plugin, msj=mesaj))
         else:
-            await event.edit(LANG['NOT_FOUND'] + ":`afk/alive/pm/kickme/dızcı/ban/mute/approve/disapprove/block`")
+            await event.edit(LANG['NOT_FOUND'] + ":`afk/alive/pm/kickme/dızcı/ban/mute/approve/disapprove/block/restart`")
 
 CmdHelp('deyisdir').add_command(
     'deyisdir', (LANG['DY1']), (LANG['DY2']), (LANG['DY3'])
