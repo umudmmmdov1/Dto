@@ -8,7 +8,7 @@ from asyncio import sleep
 from os import execl
 import sys
 import io
-import sys
+from userbot.main import PLUGIN_MESAJLAR
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, SUDO_ID
 from userbot.events import register
 from userbot.cmdhelp import CmdHelp
@@ -80,7 +80,7 @@ async def shutdown(event):
 @register(outgoing=True, pattern="^.stop$")
 @register(incoming=True, from_users=SUDO_ID, pattern="^.restart$")
 async def restart(event):
-    await event.edit(LANG['RESTARTING'])
+    await event.edit(PLUGIN_MESAJLAR['restart'])
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
                                         "Bot yenidən başladıldı.")
