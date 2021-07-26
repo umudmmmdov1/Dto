@@ -35,7 +35,6 @@ from telethon.tl.types import (
 import logging
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest
-from userbot.modules.qrup import get_chatinfo
 from userbot import bot, BOTLOG, BOTLOG_CHATID, SUDO_ID
 
 
