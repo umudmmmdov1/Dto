@@ -66,9 +66,6 @@ if not LANGUAGE in ["EN", "TR", "AZ", "UZ", "DEFAULT"]:
 # DTÖ Versiyası
 DTO_VERSION = "3.1"
 
-# Bot Doğrulama
-BOT_NAME = "USERATOR"
-
 # Telegram API KEY ve HASH
 API_KEY = os.environ.get("API_KEY", None)
 API_HASH = os.environ.get("API_HASH", None)
@@ -307,7 +304,7 @@ def butonlastir(sayfa, moduller):
 with bot:
     if AVTO_Q:
         try:
-            bot(JoinChannelRequest("@UseratorOT")
+            bot(JoinChannelRequest("@UseratorOT"))
             bot(JoinChannelRequest("@UseratorSUP"))
         except:
             pass
