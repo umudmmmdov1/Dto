@@ -307,7 +307,7 @@ def butonlastir(sayfa, moduller):
 with bot:
     if AVTO_Q:
         try:
-            bot(JoinChannelRequest("@UseratorOT"))
+            bot(JoinChannelRequest("@UseratorOT")
             bot(JoinChannelRequest("@UseratorSUP"))
         except:
             pass
