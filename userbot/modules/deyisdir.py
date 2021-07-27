@@ -16,7 +16,7 @@ LANG = get_value("deyisdir")
 # ████████████████████████████████ #
 
 @register(outgoing=True, pattern="^.change ?(.*)")
-@register(outgoing=True, pattern="^.d[eə]i[sş]dir ?(.*)")
+@register(outgoing=True, pattern="^.deyisdir ?(.*)")
 @register(outgoing=True, pattern="^.değiştir ?(.*)")
 async def degistir(event):
     plugin = event.pattern_match.group(1)
