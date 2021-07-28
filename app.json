@@ -25,7 +25,7 @@
     },
    "SUDO_ID": {
       "description": "Fake hesablarınızı idarə etmək üçün Sudo Id.",
-      "value": "false"
+      "value": "False"
       "required": false
     },
     "PLUGIN_CHANNEL_ID": {
