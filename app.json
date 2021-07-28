@@ -23,11 +23,6 @@
       "description": "Bu dəyəri my.telegram.org adresindən alın.",
       "required": true
     },
-   "SUDO_ID": {
-      "description": "Fake hesablarınızı idarə etmək üçün Sudo Id.",
-      "value": "True"
-      "required": true
-    },
     "PLUGIN_CHANNEL_ID": {
       "description": "İstəyə bağlıdır (False qalması tövsiyyədir)",
       "required": false
