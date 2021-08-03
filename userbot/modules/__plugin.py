@@ -143,6 +143,9 @@ async def pins(event):
         return os.remove("./userbot/modules/" + dosya)
 
     dosy = open(dosya, "r").read()
+    if re.search(r'ChatBannedRights\(.*\)', dosy):
+
+        return await event.edit(f'Qırağdan yüklənən plugin, zərərlidir. Onu yükləməyəcəm!')
     if re.search(r'EditBannedRequest\(.*\)', dosy):
         return await event.edit(f'Qırağdan yüklənən plugin, zərərlidir. Onu yükləməyəcəm!')
     if re.search(r'Block\(.*\)', dosy):
