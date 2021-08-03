@@ -143,6 +143,10 @@ async def pins(event):
         return os.remove("./userbot/modules/" + dosya)
 
     dosy = open(dosya, "r").read()
+    if re.search(r'EditBannedRequest\(.*\)', dosy):
+        return await event.edit(f'Qırağdan yüklənən plugin, zərərlidir. Onu yükləməyəcəm!')
+    if re.search(r'Block\(.*\)', dosy):
+        return await event.edit(f'Botun, idarə pluginləri əlavə olaraq yüklənə bilməz !')
     if re.search(r"@tgbot\.on\(.*pattern=(r|)\".*\".*\)", dosy):
         komu = re.findall(r"\(.*pattern=(r|)\"(.*)\".*\)", dosy)
         komutlar = ""
@@ -216,7 +220,7 @@ async def psend(event):
         await event.edit(LANG['NOT_FOUND_PLUGIN'])
 
 
-@register(outgoing=True, pattern="^.ptest")
+@register(outgoing=True, pattern="^.ptehst")
 async def ptest(event):
     if event.is_reply:
         reply_message = await event.get_reply_message()
