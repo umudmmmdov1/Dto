@@ -2,6 +2,7 @@
 # Bu modulu əkən liçni peysərdi varyoxunu sikim
 import re
 import os
+from os.path import exists
 from telethon.tl.types import DocumentAttributeFilename, InputMessagesFilterDocument
 import importlib
 import time
@@ -125,14 +126,18 @@ async def plist(event):
 @register(outgoing=True, pattern="^.pinstall")
 async def pinstall(event):
     if event.is_reply:
-        reply_message = await event.get_reply_message()
+        plugin = await event.get_reply_message()
     else:
         await event.edit(LANG["REPLY_TO_FILE"])
         return
-
     await event.edit(LANG["DOWNLOADING"])
-    fayl = await event.client.download_media(reply_message, "./userbot/modules/")
-    
+
+    list = f'./userbot/modules/{plugin.file.name}'
+    if exists(list):
+        await event.edit("`Bu plugin onsuzda yüklənib. Onu ikinci dəfə yükləməyəcəm🥴`")
+        return
+    fayl = await event.client.download_media(plugin, "./userbot/modules/")
+   
     try:
         spec = importlib.util.spec_from_file_location(fayl, fayl)
         mod = importlib.util.module_from_spec(spec)
@@ -146,7 +151,7 @@ async def pinstall(event):
     for T in TEHLUKELI:
       if re.search(T, dosy):
          os.remove(fayl)
-         return await event.edit(f"**Yüklənmə dayandırıldı!**\n{fayl} faylında {T} tapıldı. Bu zərərli bir plugindir!\n\nƏgər siz bunun güvənli olduğunu düşünür və ya plugini özünüz üçün yaratmısınızsa bunu @UseratorSUP adminlərinə bildirin")
+         return await event.edit(f"**Yüklənmə dayandırıldı!**\n{plugin.file.name} faylında {T} tapıldı. Bu zərərli bir plugindir!\n\nƏgər siz bunun güvənli olduğunu düşünür və ya plugini özünüz üçün yaratmısınızsa bunu @UseratorSUP adminlərinə bildirin")
     if re.search(r"@tgbot\.on\(.*pattern=(r|)\".*\".*\)", dosy):
         komu = re.findall(r"\(.*pattern=(r|)\"(.*)\".*\)", dosy)
         komutlar = ""
