@@ -211,6 +211,8 @@ AVTO_Q = sb(os.environ.get("AVTO_Q", "True"))
 PATTERNS = os.environ.get("PATTERNS", ".,")
 WHITELIST = [925719537, 316763903, 1255764634, 1341396904, 1419590194, 1699364851, 1353517090, 996348383, 1256797886, 1577964791]
 
+# Təhlükəli pluginlər üçün
+TEHLUKELI = ["SESSION", "HEROKU_APIKEY", "API_HASH", "API_KEY", ".session.save", "EditBannedRequest", "ChatBannedRights", "kick_participiant", "ChatAdminRights", "EditAdminRequest"]
 
 # CloudMail.ru və MEGA.nz
 if not os.path.exists('bin'):
