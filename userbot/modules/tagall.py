@@ -70,7 +70,7 @@ async def _(tag):
 			break
 		a_+=5
 		await tag.client.send_message(tag.chat_id, "[{}](tg://user?id={}) {}".format(i.first_name, i.id, seasons))
-		sleep(0.5)
+		sleep(1.9)
 
 CmdHelp('tagall').add_command(
     'all', None, 'Hərkəsi bir mesajda tağ edər.'
@@ -79,5 +79,5 @@ CmdHelp('tagall').add_command(
 ).add_command(
     '1tag', None, 'Hərkəsi bir-bir tağ edər.'
 ).add_command(
-    'admin', None, 'Bu əmri hər hansıxa sohbətdə işlədəndə adminləri tağ edər.'
+    'admin', None, 'Bu əmri hər hansısa sohbətdə işlədəndə adminləri tağ edər.'
 ).add()
