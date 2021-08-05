@@ -6,7 +6,12 @@ from asyncio import subprocess as asyncsub
 from os import remove
 from time import gmtime, strftime
 from traceback import format_exc
-
+from telethon.errors.rpcerrorlist import (
+    ChatSendInlineForbiddenError,
+    FloodWaitError,
+    MessageIdInvalidError,
+    UserIsBotError,
+)
 from telethon import events
 
 from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
