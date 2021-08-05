@@ -8,7 +8,7 @@ import importlib
 import time
 import traceback
 
-from userbot import CMD_HELP, bot, tgbot, TEHLUKELI, PLUGIN_CHANNEL_ID, PATTERNS
+from userbot import CMD_HELP, bot, tgbot, TEHLUKELI, PLUGIN_CHANNEL_ID, PATTERNS, BRAIN_CHECKER, WHITELIST
 from userbot.events import register
 from userbot.main import extractCommands
 import userbot.cmdhelp
@@ -248,4 +248,4 @@ async def ptest(event):
         await event.edit(f"{LANG['PLUGIN_BUGGED']} {e}`")
         return os.remove("./userbot/temp_plugins/" + dosya)
 
-    return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Ama əmri tapa bilmədim bot yenidən başladıldıqda plugin silinəcək`')
+    return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Ama əmri tapa bilmədim bot yenidən başladıldıqda plugin silinəcək.`')
