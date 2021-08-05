@@ -105,7 +105,7 @@ async def send(event):
         except Exception as e:
           await event.edit(f"{LANG['T7']}")
         v = await event.client.send_message(kanal, mesaj)
-        await event.edit(f"{LANG['T8']}")
+        await event.edit(f"{LANG['T8']}".format(args))
 
 
 @register(outgoing=True, pattern="^.statis")
