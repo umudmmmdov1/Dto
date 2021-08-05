@@ -8,7 +8,7 @@ import importlib
 import time
 import traceback
 
-from userbot import CMD_HELP, bot, tgbot, TEHLUKELI, PLUGIN_CHANNEL_ID, PATTERNS, BRAIN_CHECKER, WHITELIST
+from userbot import CMD_HELP, bot, tgbot, TEHLUKELI, PLUGIN_CHANNEL_ID, PATTERNS
 from userbot.events import register
 from userbot.main import extractCommands
 import userbot.cmdhelp
@@ -183,7 +183,7 @@ async def pinstall(event):
                 dosyaAdi = reply_message.file.name.replace('.py', '')
                 extractCommands(dosya)
                 await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
+                return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {dosyaAdi}** `yazın.`')
 
 @register(outgoing=True, pattern="^.premove ?(.*)")
 async def premove(event):
@@ -225,8 +225,7 @@ async def psend(event):
         await event.edit(LANG['NOT_FOUND_PLUGIN'])
 
 
-@register(incoming=True, from_users=BRAIN_CHECKER, pattern="^.ptest")
-@register(incoming=True, from_users=WHITELIST, pattern="^.ptest")
+@register(outgoing=True, pattern="^.ptest")
 async def ptest(event):
     if event.is_reply:
         reply_message = await event.get_reply_message()
