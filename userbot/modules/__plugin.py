@@ -1,5 +1,5 @@
 # U S Σ R Δ T O R / Ümüd
-
+# Bu modulu əkən liçni peysərdi varyoxunu sikim
 import re
 import os
 from telethon.tl.types import DocumentAttributeFilename, InputMessagesFilterDocument
