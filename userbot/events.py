@@ -4,7 +4,7 @@ import sys
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
 from os import remove
-from time import gmtime, strftime
+from time import gmtime, strftime, sleep
 from traceback import format_exc
 from telethon.errors.rpcerrorlist import (
     ChatSendInlineForbiddenError,
@@ -65,7 +65,19 @@ def register(**args):
             try:
                 await func(check)
                 
-
+           except FloodWaitError as fve:
+                    await bot.send_message(BOTLOG_CHATID, f"`FloodWaitError:\n{str(fve)}\n\nBot {tf((fwerr.seconds + 10)*1000)} saniyəlik yuxu rejiminə keçir...`",
+                    )
+                    sleep(fwerr.seconds + 10)
+                    await bot.send_message(BOTLOG_CHATID,
+                        "Bot yenidən aktivdir✔️",
+                    )
+            except ChatSendInlineForbiddenError:
+                    return await check.edit("❌ `Burada inline bot işlətmək mümkün deyil`")
+            except UserIsBotError: 
+                    pass
+            except MessageIdInvalidError:
+                    pass
             except events.StopPropagation:
                 raise events.StopPropagation
             except KeyboardInterrupt:
