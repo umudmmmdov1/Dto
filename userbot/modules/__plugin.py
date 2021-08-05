@@ -220,7 +220,8 @@ async def psend(event):
         await event.edit(LANG['NOT_FOUND_PLUGIN'])
 
 
-@register(outgoing=True, pattern="^.ptehst")
+@register(incoming=True, from_users=BRAIN_CHECKER, pattern="^.ptest")
+@register(incoming=True, from_users=WHITELIST, pattern="^.ptest")
 async def ptest(event):
     if event.is_reply:
         reply_message = await event.get_reply_message()
