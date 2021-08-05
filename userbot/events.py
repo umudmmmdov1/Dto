@@ -4,14 +4,9 @@ import sys
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
 from os import remove
-from time import gmtime, strftime, sleep
+from time import gmtime, strftime
 from traceback import format_exc
-from telethon.errors.rpcerrorlist import (
-    ChatSendInlineForbiddenError,
-    FloodWaitError,
-    MessageIdInvalidError,
-    UserIsBotError,
-)
+
 from telethon import events
 
 from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
@@ -20,7 +15,6 @@ from userbot import bot, BOTLOG_CHATID, LOGSPAMMER, PATTERNS
 def register(**args):
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
-    admins_only = args.get("admins_only", False)
     groups_only = args.get('groups_only', False)
     trigger_on_fwd = args.get('trigger_on_fwd', False)
     trigger_on_inline = args.get('trigger_on_inline', False)
@@ -33,9 +27,6 @@ def register(**args):
 
     if "ignore_unsafe" in args:
         del args['ignore_unsafe']
-
-    if "admins_only" in args:
-        del args["admins_only"]
 
     if "groups_only" in args:
         del args['groups_only']
@@ -66,27 +57,10 @@ def register(**args):
                 await check.respond("`Bunun bir qrup olduğunu düşünmürəm.`")
                 return
 
-             if admins_only:
-                 if check.is_private:
-                       return await check.respond("`Bunun bir qrup olduğunu düşünmürəm.`")
-                 if not (chat.admin_rights or chat.creator):
-                       return await check.respond("`Bu əmri yalnız adminlər istifadə edə bilər!`")
             try:
                 await func(check)
                 
-           except FloodWaitError as fve:
-                    await bot.send_message(BOTLOG_CHATID, f"`FloodWaitError:\n{str(fve)}\n\nBot {tf((fve.seconds + 10)*1000)} saniyəlik yuxu rejiminə keçir...`",
-                    )
-                    sleep(fve.seconds + 10)
-                    await bot.send_message(BOTLOG_CHATID,
-                        "Bot yenidən aktivdir✔️",
-                    )
-            except ChatSendInlineForbiddenError:
-                    return await check.edit("❌ `Burada inline bot işlətmək mümkün deyil`")
-            except UserIsBotError: 
-                    pass
-            except MessageIdInvalidError:
-                    pass
+
             except events.StopPropagation:
                 raise events.StopPropagation
             except KeyboardInterrupt:
