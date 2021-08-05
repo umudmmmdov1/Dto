@@ -7,7 +7,7 @@ import importlib
 import time
 import traceback
 
-from userbot import CMD_HELP, bot, tgbot, PLUGIN_CHANNEL_ID, PATTERNS
+from userbot import CMD_HELP, bot, tgbot, TEHLUKELI, PLUGIN_CHANNEL_ID, PATTERNS
 from userbot.events import register
 from userbot.main import extractCommands
 import userbot.cmdhelp
@@ -123,7 +123,7 @@ async def plist(event):
         await event.edit(LANG["TEMP_PLUGIN"])
 
 @register(outgoing=True, pattern="^.pinstall")
-async def pins(event):
+async def pinstall(event):
     if event.is_reply:
         reply_message = await event.get_reply_message()
     else:
@@ -131,22 +131,22 @@ async def pins(event):
         return
 
     await event.edit(LANG["DOWNLOADING"])
-    dosya = await event.client.download_media(reply_message, "./userbot/modules/")
+    fayl = await event.client.download_media(reply_message, "./userbot/modules/")
     
     try:
-        spec = importlib.util.spec_from_file_location(dosya, dosya)
+        spec = importlib.util.spec_from_file_location(fayl, fayl)
         mod = importlib.util.module_from_spec(spec)
 
         spec.loader.exec_module(mod)
     except Exception as e:
         await event.edit(f"{LANG['PLUGIN_BUGGED']} {e}`")
-        return os.remove("./userbot/modules/" + dosya)
+        return os.remove("./userbot/modules/" + fayl)
 
-    dosy = open(dosya, "r").read()
-    if re.search(r'EditBannedRequest\(.*\)', dosy):
-        return await event.edit(f'Qırağdan yüklənən plugin, zərərlidir. Onu yükləməyəcəm!')
-    if re.search(r'Block\(.*\)', dosy):
-        return await event.edit(f'Botun, idarə pluginləri əlavə olaraq yüklənə bilməz !')
+    dosy = open(fayl, "r").read()
+    for T in TEHLUKELI:
+      if re.search(T, dosy):
+         os.remove(fayl)
+         return await event.edit(f"**Yüklənmə dayandırıldı!**\n{fayl} faylında {T} tapıldı. Bu zərərli bir plugindir!\n\nƏgər siz bunun güvənli olduğunu düşünür və ya plugini özünüz üçün yaratmısınızsa bunu @UseratorSUP adminlərinə bildirin")
     if re.search(r"@tgbot\.on\(.*pattern=(r|)\".*\".*\)", dosy):
         komu = re.findall(r"\(.*pattern=(r|)\"(.*)\".*\)", dosy)
         komutlar = ""
