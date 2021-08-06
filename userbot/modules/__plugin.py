@@ -168,21 +168,21 @@ async def pinstall(event):
         if (not type(Pattern) == list) or (len(Pattern) < 1 or len(Pattern[0]) < 1):
             if re.search(r'CmdHelp\(.*\)', dosy):
                 cmdhelp = re.findall(r"CmdHelp\([\"'](.*)[\"']\)", dosy)[0]
-                await reply_message.forward_to(PLUGIN_CHANNEL_ID)
+                await plugin.forward_to(PLUGIN_CHANNEL_ID)
                 return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
             else:
-                await reply_message.forward_to(PLUGIN_CHANNEL_ID)
-                userbot.cmdhelp.CmdHelp(dosya).add_warning('Əmrlər tapılmadı!').add()
+                await plugin.forward_to(PLUGIN_CHANNEL_ID)
+                userbot.cmdhelp.CmdHelp(fayl).add_warning('Əmrlər tapılmadı!').add()
                 return await event.edit(LANG['PLUGIN_DESCLESS'])
         else:
             if re.search(r'CmdHelp\(.*\)', dosy):
                 cmdhelp = re.findall(r"CmdHelp\([\"'](.*)[\"']\)", dosy)[0]
-                await reply_message.forward_to(PLUGIN_CHANNEL_ID)
+                await plugin.forward_to(PLUGIN_CHANNEL_ID)
                 return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {cmdhelp}** `yazın.`')
             else:
-                dosyaAdi = reply_message.file.name.replace('.py', '')
-                extractCommands(dosya)
-                await reply_message.forward_to(PLUGIN_CHANNEL_ID)
+                dosyaAdi = plugin.file.name.replace('.py', '')
+                extractCommands(fayl)
+                await plugin.forward_to(PLUGIN_CHANNEL_ID)
                 return await event.edit(f'__📥 Plugin uğurla yükləndi!__\n`ℹ️ Daha ətraflı məlumat almaq üçün` **.dto {dosyaAdi}** `yazın.`')
 
 @register(outgoing=True, pattern="^.premove ?(.*)")
